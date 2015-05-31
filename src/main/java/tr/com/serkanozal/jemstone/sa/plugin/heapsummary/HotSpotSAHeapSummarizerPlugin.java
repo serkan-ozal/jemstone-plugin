@@ -36,7 +36,7 @@ public class HotSpotSAHeapSummarizerPlugin
                 JavaVersion.JAVA_8
             };
     private static final String USAGE = 
-            "Usage: " + Jemstone.class.getName() + " " + 
+            Jemstone.class.getName() + " " + 
                 "(-i " + "\"" + PLUGIN_ID + "\"" + " <process_id>)" + 
                 " | " + 
                 "(-p " + HotSpotSAHeapSummarizerPlugin.class.getName() + " <process_id>)";
