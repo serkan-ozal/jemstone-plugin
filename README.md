@@ -3,7 +3,7 @@ Plug-in repository for Jemstone
 
 1. What is Jemstone-Plugin?
 ==============
-**Jemstone-Plugin** repository is for all additional plugins (not built-in plugins) for [Jemstone](https://github.com/serkan-ozal/jemstone).
+**Jemstone-Plugin** repository contains all additional plugins (not built-in plugins) for [Jemstone](https://github.com/serkan-ozal/jemstone).
 
 2. Plugins
 ==============
