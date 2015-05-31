@@ -242,7 +242,7 @@ public class HotSpotSAClassLoaderStatsWorker
         out.flush();
 
         return new HotSpotSAKeyValueResult().
-                    addResult("Heap Summary", 
+                    addResult("ClassLoader Stats", 
                               "\n\t" + 
                                   os.toString().replace("\n", "\n\t").trim() + 
                               "\n");
