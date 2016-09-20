@@ -19,6 +19,7 @@ package tr.com.serkanozal.jemstone;
 import tr.com.serkanozal.jemstone.Jemstone;
 import tr.com.serkanozal.jemstone.sa.HotSpotServiceabilityAgentManager;
 import tr.com.serkanozal.jemstone.sa.plugin.classloaderstats.HotSpotSAClassLoaderStatsPlugin;
+import tr.com.serkanozal.jemstone.sa.plugin.disassembler.HotSpotSADisassemblerPlugin;
 import tr.com.serkanozal.jemstone.sa.plugin.heapsummary.HotSpotSAHeapSummarizerPlugin;
 
 /**
@@ -31,7 +32,7 @@ public class PluginDemo {
     private static final HotSpotServiceabilityAgentManager hotSpotSAManager = 
             Jemstone.getHotSpotServiceabilityAgentManager();
     
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		System.out.println(
 		        hotSpotSAManager.runPlugin(
 		                HotSpotSAHeapSummarizerPlugin.PLUGIN_ID).toString());
@@ -43,6 +44,28 @@ public class PluginDemo {
 		System.out.println(
                 hotSpotSAManager.runPlugin(
                         HotSpotSAClassLoaderStatsPlugin.PLUGIN_ID).toString());
+		
+        // ///////////////////////////////////////////////////////////////////////////////
+		
+		long[] array = new long[1024];
+        for (int i = 0; i < 10000; i++) {
+            findSum(array);
+        }
+        
+        Thread.sleep(3000);
+        
+		System.out.println(
+                hotSpotSAManager.runPlugin(
+                        HotSpotSADisassemblerPlugin.PLUGIN_ID,
+                        new String[] {PluginDemo.class.getName() + ".findSum"} ).toString());
 	}
+	
+    private static long findSum(long[] array) {
+        long sum = 0L;
+        for (int i = 0; i < array.length; i++) {
+            sum += array[i];
+        }
+        return sum;
+    }
 
 }
