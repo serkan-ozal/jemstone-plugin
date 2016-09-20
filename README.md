@@ -126,3 +126,132 @@ HotSpotSAKeyValueResult [{ClassLoader Stats=
 ```
 
 **P.S:** Execution of this plugin may take a few minutes.
+
+2.3. Diassembler Plugin
+--------------
+Prints the **JIT**ted native code of any given method dynamically at runtime in the target JVM.
+
+Here is the [plugin](https://github.com/serkan-ozal/jemstone-plugin/blob/master/src/main/java/tr/com/serkanozal/jemstone/sa/plugin/disassembler/HotSpotSADisassemblerPlugin.java) and the [implementation](https://github.com/serkan-ozal/jemstone-plugin/blob/master/src/main/java/tr/com/serkanozal/jemstone/sa/plugin/disassembler/HotSpotSADisassemblerWorker.java)
+The usage from commandline is:
+```
+tr.com.serkanozal.jemstone.Jemstone 
+        (-i "HotSpot_Disassembler" <process_id> <method_name>) 
+	| 
+	(-p tr.com.serkanozal.jemstone.sa.plugin.disassembler.HotSpotSADisassemblerPlugin <process_id> <method_name>) 
+```
+
+This is the sample output the plugin:
+```
+HotSpotSAKeyValueResult [{tr.com.serkanozal.jemstone.PluginDemo.findSum(long[])=
+Information:
+	NMethod for tr/com/serkanozal/jemstone/PluginDemo.findSum([J)J content: [0x0000000002ca1f80, 0x0000000002ca20b8),  code: [0x0000000002ca1f80, 0x0000000002ca20b8),  data: [0x0000000002ca20b8, 0x0000000002ca2268),  oops: [0x0000000002ca20b8, 0x0000000002ca20c0),  frame size: 32
+Disassembled code:
+	[Constants]
+	  0x0000000002ca1f80: mov    %eax,-0x6000(%rsp)
+	  0x0000000002ca1f87: push   %rbp
+	  0x0000000002ca1f88: sub    $0x10,%rsp
+	  0x0000000002ca1f8c: mov    0xc(%rdx),%r10d
+	  0x0000000002ca1f90: test   %r10d,%r10d
+	  0x0000000002ca1f93: jle    0x0000000002ca2061
+	  0x0000000002ca1f99: test   %r10d,%r10d
+	  0x0000000002ca1f9c: jbe    0x0000000002ca2065
+	  0x0000000002ca1fa2: mov    %r10d,%r8d
+	  0x0000000002ca1fa5: dec    %r8d
+	  0x0000000002ca1fa8: cmp    %r10d,%r8d
+	  0x0000000002ca1fab: jae    0x0000000002ca2065
+	  0x0000000002ca1fb1: mov    0x10(%rdx),%rax
+	  0x0000000002ca1fb5: mov    %r10d,%r11d
+	  0x0000000002ca1fb8: add    $0xfffffff1,%r11d
+	  0x0000000002ca1fbc: mov    $0x1,%r9d
+	  0x0000000002ca1fc2: mov    $0x80000000,%ebx
+	  0x0000000002ca1fc7: cmp    %r11d,%r8d
+	  0x0000000002ca1fca: cmovl  %ebx,%r11d
+	  0x0000000002ca1fce: cmp    $0x1,%r11d
+	  0x0000000002ca1fd2: jle    0x0000000002ca2042
+	  0x0000000002ca1fd4: nopl   0x0(%rax,%rax,1)
+	  0x0000000002ca1fdc: data16 data16 xchg %ax,%ax
+	  0x0000000002ca1fe0: add    0x10(%rdx,%r9,8),%rax
+	  0x0000000002ca1fe5: movslq %r9d,%r8
+	  0x0000000002ca1fe8: add    0x18(%rdx,%r8,8),%rax
+	  0x0000000002ca1fed: add    0x20(%rdx,%r8,8),%rax
+	  0x0000000002ca1ff2: add    0x28(%rdx,%r8,8),%rax
+	  0x0000000002ca1ff7: add    0x30(%rdx,%r8,8),%rax
+	  0x0000000002ca1ffc: add    0x38(%rdx,%r8,8),%rax
+	  0x0000000002ca2001: add    0x40(%rdx,%r8,8),%rax
+	  0x0000000002ca2006: add    0x48(%rdx,%r8,8),%rax
+	  0x0000000002ca200b: add    0x50(%rdx,%r8,8),%rax
+	  0x0000000002ca2010: add    0x58(%rdx,%r8,8),%rax
+	  0x0000000002ca2015: add    0x60(%rdx,%r8,8),%rax
+	  0x0000000002ca201a: add    0x68(%rdx,%r8,8),%rax
+	  0x0000000002ca201f: add    0x70(%rdx,%r8,8),%rax
+	  0x0000000002ca2024: add    0x78(%rdx,%r8,8),%rax
+	  0x0000000002ca2029: add    0x80(%rdx,%r8,8),%rax
+	  0x0000000002ca2031: add    0x88(%rdx,%r8,8),%rax
+	  0x0000000002ca2039: add    $0x10,%r9d
+	  0x0000000002ca203d: cmp    %r11d,%r9d
+	  0x0000000002ca2040: jl     0x0000000002ca1fe0
+	  0x0000000002ca2042: cmp    %r10d,%r9d
+	  0x0000000002ca2045: jge    0x0000000002ca2055
+	  0x0000000002ca2047: nop
+	  0x0000000002ca2048: add    0x10(%rdx,%r9,8),%rax
+	  0x0000000002ca204d: inc    %r9d
+	  0x0000000002ca2050: cmp    %r10d,%r9d
+	  0x0000000002ca2053: jl     0x0000000002ca2048
+	  0x0000000002ca2055: add    $0x10,%rsp
+	  0x0000000002ca2059: pop    %rbp
+	  0x0000000002ca205a: test   %eax,-0x2882060(%rip)        # 0x0000000000420000
+	  0x0000000002ca2060: retq   
+	  0x0000000002ca2061: xor    %eax,%eax
+	  0x0000000002ca2063: jmp    0x0000000002ca2055
+	  0x0000000002ca2065: mov    %rdx,%rbp
+	  0x0000000002ca2068: mov    $0xffffff86,%edx
+	  0x0000000002ca206d: xchg   %ax,%ax
+	  0x0000000002ca206f: callq  0x00000000027f57a0
+	  0x0000000002ca2074: int3   
+	  0x0000000002ca2075: mov    $0xfffffff6,%edx
+	  0x0000000002ca207a: nop
+	  0x0000000002ca207b: callq  0x00000000027f57a0
+	  0x0000000002ca2080: int3   
+	  0x0000000002ca2081: hlt    
+	  0x0000000002ca2082: hlt    
+	  0x0000000002ca2083: hlt    
+	  0x0000000002ca2084: hlt    
+	  0x0000000002ca2085: hlt    
+	  0x0000000002ca2086: hlt    
+	  0x0000000002ca2087: hlt    
+	  0x0000000002ca2088: hlt    
+	  0x0000000002ca2089: hlt    
+	  0x0000000002ca208a: hlt    
+	  0x0000000002ca208b: hlt    
+	  0x0000000002ca208c: hlt    
+	  0x0000000002ca208d: hlt    
+	  0x0000000002ca208e: hlt    
+	  0x0000000002ca208f: hlt    
+	  0x0000000002ca2090: hlt    
+	  0x0000000002ca2091: hlt    
+	  0x0000000002ca2092: hlt    
+	  0x0000000002ca2093: hlt    
+	  0x0000000002ca2094: hlt    
+	  0x0000000002ca2095: hlt    
+	  0x0000000002ca2096: hlt    
+	  0x0000000002ca2097: hlt    
+	  0x0000000002ca2098: hlt    
+	  0x0000000002ca2099: hlt    
+	  0x0000000002ca209a: hlt    
+	  0x0000000002ca209b: hlt    
+	  0x0000000002ca209c: hlt    
+	  0x0000000002ca209d: hlt    
+	  0x0000000002ca209e: hlt    
+	  0x0000000002ca209f: hlt    
+	[Stub Code]
+	  0x0000000002ca20a0: jmpq   0x000000000281c720
+	[Deopt Handler Code]
+	  0x0000000002ca20a5: callq  0x0000000002ca20aa
+	  0x0000000002ca20aa: subq   $0x5,(%rsp)
+	  0x0000000002ca20af: jmpq   0x00000000027f7200
+	  0x0000000002ca20b4: hlt    
+	  0x0000000002ca20b5: hlt    
+	  0x0000000002ca20b6: hlt    
+	  0x0000000002ca20b7: hlt    
+	}]
+```
