@@ -32,29 +32,29 @@ public class PluginDemo {
     private static final HotSpotServiceabilityAgentManager hotSpotSAManager = 
             Jemstone.getHotSpotServiceabilityAgentManager();
     
-	public static void main(String[] args) throws Exception {
-		System.out.println(
-		        hotSpotSAManager.runPlugin(
-		                HotSpotSAHeapSummarizerPlugin.PLUGIN_ID).toString());
+    public static void main(String[] args) throws Exception {
+        System.out.println(
+                hotSpotSAManager.runPlugin(
+                        HotSpotSAHeapSummarizerPlugin.PLUGIN_ID).toString());
 		
         // ///////////////////////////////////////////////////////////////////////////////
 	
-		// *** NOTE ***
-		// This may take a few minutes
-		System.out.println(
+        // *** NOTE ***
+        // This may take a few minutes
+        System.out.println(
                 hotSpotSAManager.runPlugin(
                         HotSpotSAClassLoaderStatsPlugin.PLUGIN_ID).toString());
 		
         // ///////////////////////////////////////////////////////////////////////////////
 		
-		long[] array = new long[1024];
+        long[] array = new long[1024];
         for (int i = 0; i < 10000; i++) {
             findSum(array);
         }
         
         Thread.sleep(3000);
         
-		System.out.println(
+        System.out.println(
                 hotSpotSAManager.runPlugin(
                         HotSpotSADisassemblerPlugin.PLUGIN_ID,
                         new String[] {PluginDemo.class.getName() + ".findSum"} ).toString());
