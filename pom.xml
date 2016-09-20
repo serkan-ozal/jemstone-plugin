@@ -3,7 +3,7 @@
   	<modelVersion>4.0.0</modelVersion>
   	<groupId>tr.com.serkanozal</groupId>
   	<artifactId>jemstone-plugin</artifactId>
-  	<version>1.0</version>
+  	<version>1.1</version>
     <name>Jemstone Plugin Repository</name>
     <url>https://github.com/serkan-ozal/jemstone-plugin</url>
     
@@ -19,7 +19,7 @@
         <maven.surefire.plugin.version>2.9</maven.surefire.plugin.version>
         <maven.deploy.plugin.version>2.6</maven.deploy.plugin.version>
         
-        <jemstone.version>1.0</jemstone.version>
+        <jemstone.version>1.1</jemstone.version>
         <sa_jdi.version>1.8</sa_jdi.version> 
 		<junit.version>4.11</junit.version>
 
@@ -68,7 +68,7 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <filtering>true</filtering>
+                <filtering>false</filtering>
             </resource>
         </resources>
     </build>
@@ -92,6 +92,51 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>3.2.2.RELEASE</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-context</artifactId>
+	        <version>3.2.2.RELEASE</version>
+	        <scope>provided</scope>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-context-support</artifactId>
+	        <version>3.2.2.RELEASE</version>
+	        <scope>provided</scope>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-aop</artifactId>
+	        <version>3.2.2.RELEASE</version>
+	        <scope>provided</scope>
+	    </dependency>
+	    <dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aspects</artifactId>
+				<version>3.2.2.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjrt</artifactId>
+				<version>1.6.11</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>1.6.11</version>
+			</dependency>
 	</dependencies>
 	
    	<distributionManagement>
